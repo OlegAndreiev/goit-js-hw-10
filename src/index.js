@@ -1,16 +1,47 @@
 import './css/styles.css';
 const debounce = require('lodash.debounce');
-import Notiflix from 'notiflix';
-import { fetchCountries, data } from './fetchCountries';
-import { outputData } from './fetchCountries';
+
+import { fetchCountries } from './fetchCountries';
+
 const DEBOUNCE_DELAY = 300;
+export const DEFAULT_URL = 'https://restcountries.com/v3.1/name';
 
-// const DEFAULT_URL = 'https://restcountries.com/v3.1/name/';
-
-// fetch(`${DEFAULT_URL}/Ukraine`);
 export const inputSearch = document.querySelector('#search-box');
-const countryList = document.querySelector('.country-list');
-const countryInfo = document.querySelector('.country-info');
-// console.log(countryInfo);
+export const countryList = document.querySelector('.country-list');
+export const countryInfo = document.querySelector('.country-info');
 
 inputSearch.addEventListener('input', debounce(fetchCountries, DEBOUNCE_DELAY));
+
+export function createMarkupOneCountry(arr) {
+  return arr
+    .map(
+      item =>
+        `<div class='item-country'><img src="${
+          item.flags.svg
+        }" alt="flag" width=60 height=50>
+        <h2 class='title'> ${item.name.official}</h2></div>
+        
+        <p><span>Capital:</span> ${item.capital}</p>
+        <p><span>Population:</span> ${item.population}</p>
+        <p><span>Languages:</span> ${Object.values(item.languages)}</p>
+       <p><img src="https://www.svgrepo.com/show/306970/wikipedia.svg" alt="Wikipedia" width=30> <a href="https://uk.wikipedia.org/wiki/${
+         item.name.official
+       } " target="_blank">Link to Wikipedia</a></p>
+       <p><img src="https://www.svgrepo.com/show/353819/google-maps.svg" alt="Google maps" width=30><a href="https://www.google.com.ua/maps/place/${
+         item.name.official
+       }"target="_blank">Link to Google maps</a></p>`
+    )
+    .join('');
+}
+
+export function createMarkupFewCountries(arr) {
+  return arr
+    .map(
+      item =>
+        `<li class='item'>
+        <img src="${item.flags.svg}" alt="flag" width=40 height=30>
+        <h2> ${item.name.official}</h2>
+        </li>`
+    )
+    .join('');
+}

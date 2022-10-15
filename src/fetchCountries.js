@@ -9,6 +9,14 @@ import {
 } from './index';
 
 export function fetchCountries(name) {
+  if (
+    inputSearch.value === ' ' ||
+    inputSearch.value === '  ' ||
+    inputSearch.value === '   '
+  ) {
+    inputSearch.value = '';
+    return;
+  }
   if (inputSearch.value !== '') {
     const input = inputSearch.value;
     const inputTrim = input.trim();
@@ -24,12 +32,12 @@ export function fetchCountries(name) {
         return responce.json();
       })
       .then(data => {
-        if (data.length >= 10) {
+        if (data.length > 10) {
           Notiflix.Notify.failure(
             `Too many matches found. Please enter a more specific name.`
           );
         }
-        if (data.length >= 2 && data.length < 10) {
+        if (data.length >= 2 && data.length <= 10) {
           const markupCountries = createMarkupFewCountries(data);
           countryList.innerHTML = markupCountries;
         }
@@ -37,16 +45,10 @@ export function fetchCountries(name) {
           const markupCountry = createMarkupOneCountry(data);
           countryInfo.innerHTML = markupCountry;
         }
-
-        console.log(data.length);
       })
       .catch(err =>
         Notiflix.Notify.failure(`Oops, there is no country with that name.`)
       );
-  }
-  if (inputSearch.value === ' ') {
-    inputSearch.value === '';
-    return;
   }
   countryList.innerHTML = '';
   countryInfo.innerHTML = '';

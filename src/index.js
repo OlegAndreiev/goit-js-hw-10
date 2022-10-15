@@ -11,7 +11,6 @@ export const countryList = document.querySelector('.country-list');
 export const countryInfo = document.querySelector('.country-info');
 
 inputSearch.addEventListener('input', debounce(fetchCountries, DEBOUNCE_DELAY));
-
 export function createMarkupOneCountry(arr) {
   return arr
     .map(
@@ -23,7 +22,9 @@ export function createMarkupOneCountry(arr) {
         
         <p><span>Capital:</span> ${item.capital}</p>
         <p><span>Population:</span> ${item.population}</p>
-        <p><span>Languages:</span> ${Object.values(item.languages)}</p>
+        <p><span>Languages:</span> ${Object.values(item.languages).join(
+          ', '
+        )}</p>
        <p><img src="https://www.svgrepo.com/show/306970/wikipedia.svg" alt="Wikipedia" width=30> <a href="https://uk.wikipedia.org/wiki/${
          item.name.official
        } " target="_blank">Link to Wikipedia</a></p>

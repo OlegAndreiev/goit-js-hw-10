@@ -1,11 +1,9 @@
 import './css/styles.css';
-const debounce = require('lodash.debounce');
-
 import { fetchCountries } from './fetchCountries';
 
+const debounce = require('lodash.debounce');
 const DEBOUNCE_DELAY = 300;
 export const DEFAULT_URL = 'https://restcountries.com/v3.1/name';
-
 export const inputSearch = document.querySelector('#search-box');
 export const countryList = document.querySelector('.country-list');
 export const countryInfo = document.querySelector('.country-info');

@@ -16,7 +16,7 @@ export function createMarkupOneCountry(arr) {
   return arr
     .map(
       item =>
-        `<div class='item-country'><img src="${
+        `<div class='item-country'><img class='img' src="${
           item.flags.svg
         }" alt="flag" width=60 height=50>
         <h2 class='title'> ${item.name.official}</h2></div>
@@ -39,7 +39,7 @@ export function createMarkupFewCountries(arr) {
     .map(
       item =>
         `<li class='item'>
-        <img src="${item.flags.svg}" alt="flag" width=40 height=30>
+        <img class='img' src="${item.flags.svg}" alt="flag" width=40 height=30>
         <h2> ${item.name.official}</h2>
         </li>`
     )

@@ -29,7 +29,7 @@ export function fetchCountries(name) {
             `Too many matches found. Please enter a more specific name.`
           );
         }
-        if (data.length > 2 && data.length < 10) {
+        if (data.length >= 2 && data.length < 10) {
           const markupCountries = createMarkupFewCountries(data);
           countryList.innerHTML = markupCountries;
         }
